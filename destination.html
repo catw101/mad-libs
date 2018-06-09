@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--Catelen Wu-->
+<html>
+	<head>
+		<title></title>		
+		<script src = "story.js"></script>
+		<script>
+			function initialize()
+			{
+				storyId = document.getElementById("story");
+				string = location.search;
+				string = string.substring(1);
+				counter = 1;
+				story();
+			}
+			function story() 
+			{
+				if (string.length == 0)
+					return;
+				q = string.substring(1);
+				pairs = q.split("&");
+				arr = [];
+				for (var i = 0; i < pairs.length; i++)
+				{
+					newPair = pairs[i].split("=");
+					arr.push(newPair);
+				}
+				newStory = STORIES[arr[0][1]];
+				display();
+			}
+			function display() 
+			{
+				wordTypes = newStory.split(DELIMITER);
+				for (var y = 1; y < wordTypes.length; y+=2) 
+				{
+					wordTypes[y] = arr[counter][1];
+					counter++;
+				}
+				storyId.innerHTML = wordTypes.join("");
+				for (f = 0; f < storyId.innerHTML.length; f++)
+				{
+					if (storyId.innerHTML[f] == "The")
+						storyId.innerHTML[f] = " ";
+				}
+			}
+		</script>
+		<style>
+			body 
+			{
+				font-family: Garamond;
+				text-align: center;
+			}
+			#story 
+			{
+				font-size: 300%;
+				padding: 10%;
+			}
+			#img 
+			{
+				width: 100%;
+			}
+		</style>
+	</head>
+	
+	<body onload="initialize();">
+		<img id = "img" src = "logo.png"/>
+		<div id = "story"></div>
+	</body>
+</html>

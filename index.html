@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--Catelen Wu-->
+<html>
+	<head>
+		<title></title>		
+		<script src = "story.js"></script>
+		<script src = "utility file.js"></script>
+		<script>
+			function initialize()
+			{
+				theForm = document.getElementById("form");
+				counter = 1;
+				storyNum = document.getElementById("stories");
+				storyNum.value = getRandomInteger(0, (STORIES.length-1));
+				createStory(STORIES[storyNum.value]);
+			}
+			function createStory(story)
+			{
+				wordTypesArray = story.split(DELIMITER);
+				for (i = 1; i < wordTypesArray.length; i+=2) 
+				{
+					createText(wordTypesArray[i]);
+				}
+			}
+			function createText(words)
+			{
+				theForm.appendChild(new Text(wordTypesArray[i].toUpperCase() + ":"));
+				var textBox = document.createElement("input");
+				textBox.type = "text";
+				lineBreak = document.createElement("br");
+				textBox.name = wordTypesArray[i] + counter;
+				theForm.appendChild(new Text(" "));
+				theForm.appendChild(textBox);
+				theForm.appendChild(lineBreak);
+				counter++;
+			}
+		</script>
+		<style>
+			body 
+			{
+				font-family: Garamond;
+				font-size: 200%;
+				text-align: center;
+			}
+			#button 
+			{
+				font-family: Garamond;
+				font-size: 150%;
+			}
+			#img 
+			{
+				width: 100%;
+			}
+		</style>
+	</head>
+	
+	<body onload="initialize();">
+		<img id = "img" src = "logo.png"/>
+		<form method = "get" id = "form" action = "destination.html">
+			<input type = "hidden" name = "stories" id = "stories"/>
+			<input id = "button" type = "submit"/><br/>
+		</form>
+	</body>
+</html>
